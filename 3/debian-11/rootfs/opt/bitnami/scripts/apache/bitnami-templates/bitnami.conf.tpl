@@ -3,8 +3,12 @@
 # Let Apache know we're behind a SSL reverse proxy
 SetEnvIf X-Forwarded-Proto https HTTPS=on
 
-<VirtualHost _default_:80>
+<VirtualHost _default_:8080>
   DocumentRoot "{{APACHE_BASE_DIR}}/htdocs"
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP_HOST} !^(localhost|127.0.0.1)
+  RewriteRule ^/(.*) https://%{SERVER_NAME}/$1 [R,L]
   <Directory "{{APACHE_BASE_DIR}}/htdocs">
     Options Indexes FollowSymLinks
     AllowOverride All
