@@ -231,6 +231,7 @@ Available environment variables:
 - `OPENCART_EMAIL`: OpenCart application email. Default: **user@example.com**
 - `OPENCART_HOST`: OpenCart server hostname/address.
 - `OPENCART_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
+- `OPENCART_ENABLE_HTTPS_ONLY`: Whether to use HTTPS only. Default: **no**.
 - `OPENCART_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTP. Default **80**.
 - `OPENCART_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTPS. Default **443**.
 - `OPENCART_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
