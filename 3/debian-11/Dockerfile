@@ -61,8 +61,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     rm -rf render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+      curl -SsLf https://raw.githubusercontent.com/mips171/oc_dist/main/opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://raw.githubusercontent.com/mips171/oc_dist/main/opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
     sha256sum -c opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
