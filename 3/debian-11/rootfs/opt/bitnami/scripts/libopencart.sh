@@ -373,9 +373,6 @@ opencart_protect_storage_dir() {
 opencart_update_hostname() {
     local -r hostname="${1:?missing hostname}"
     local http_url="http://${hostname}"
-    if is_boolean_yes "$OPENCART_ENABLE_HTTPS_ONLY"; then
-        http_url="https://${hostname}"
-    fi
     local https_url="https://${hostname}"
     [[ "$OPENCART_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && http_url+=":$OPENCART_EXTERNAL_HTTP_PORT_NUMBER"
     [[ "$OPENCART_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]] && https_url+=":$OPENCART_EXTERNAL_HTTPS_PORT_NUMBER"
