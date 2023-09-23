@@ -158,8 +158,8 @@ opencart_initialize() {
             info "An already initialized OpenCart database was provided, configuration will be skipped"
             info "Generating configuration file"
             opencart_create_config_files "${opencart_cli_args[@]}"
-            info "Upgrading database schema"
-            opencart_upgrade
+            # info "Upgrading database schema"
+            # opencart_upgrade
         fi
         info "Updating Opencart hostname"
         opencart_update_hostname "${OPENCART_HOST:-localhost}"
@@ -179,8 +179,8 @@ opencart_initialize() {
         db_user="$(opencart_conf_get "DB_USERNAME")"
         db_pass="$(opencart_conf_get "DB_PASSWORD")"
         opencart_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-        info "Upgrading database schema"
-        opencart_upgrade
+        # info "Upgrading database schema"
+        # opencart_upgrade
     fi
 
     # Remove previous storage location to avoid confusion
