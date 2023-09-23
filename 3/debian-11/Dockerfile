@@ -59,7 +59,9 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+ARG CACHEBUST=1
+RUN echo $CACHEBUST > /dev/null && \
+    mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     rm -rf opencart-* && \
     if [ ! -f opencart-3.0.3-8-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://raw.githubusercontent.com/mips171/oc_dist/main/opencart-3.0.3-8-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -68,6 +70,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c opencart-3.0.3-8-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf opencart-3.0.3-8-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf opencart-3.0.3-8-linux-${OS_ARCH}-debian-11.tar.gz
+ARG CACHEBUST=unbusted
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
