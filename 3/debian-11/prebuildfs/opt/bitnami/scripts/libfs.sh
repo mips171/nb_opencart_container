@@ -117,16 +117,15 @@ relativize() {
     realpath -q --no-symlinks --relative-base="$base" "$path" | sed -e 's|^/$|.|' -e 's|^/||'
     popd >/dev/null || exit
 }
-
 ########################
-# Configure permisions and ownership recursively
+# Configure permissions and ownership recursively
 # Globals:
 #   None
 # Arguments:
 #   $1 - paths (as a string).
 # Flags:
-#   -f|--file-mode - mode for directories.
-#   -d|--dir-mode - mode for files.
+#   -f|--file-mode - mode for files.
+#   -d|--dir-mode - mode for directories.
 #   -u|--user - user
 #   -g|--group - group
 # Returns:
@@ -170,21 +169,26 @@ configure_permissions_ownership() {
     read -r -a filepaths <<<"$paths"
     for p in "${filepaths[@]}"; do
         if [[ -e "$p" ]]; then
+            # Apply directory mode
             if [[ -n $dir_mode ]]; then
-                find -L "$p" -type d -exec chmod "$dir_mode" {} \;
+                find -L "$p" -type d -exec chmod "$dir_mode" {} +
             fi
+
+            # Apply file mode
             if [[ -n $file_mode ]]; then
-                find -L "$p" -type f -exec chmod "$file_mode" {} \;
+                find -L "$p" -type f -exec chmod "$file_mode" {} +
             fi
+
+            # Apply user and group, optimized for different combinations
             if [[ -n $user ]] && [[ -n $group ]]; then
-                chown -LR "$user":"$group" "$p"
-            elif [[ -n $user ]] && [[ -z $group ]]; then
+                chown -LR "$user:$group" "$p"
+            elif [[ -n $user ]]; then
                 chown -LR "$user" "$p"
-            elif [[ -z $user ]] && [[ -n $group ]]; then
+            elif [[ -n $group ]]; then
                 chgrp -LR "$group" "$p"
             fi
         else
-            stderr_print "$p does not exist"
+            echo "$p does not exist" >&2
         fi
     done
 }
